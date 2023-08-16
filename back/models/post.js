@@ -4,7 +4,7 @@ const { DateTime } = require("luxon");
 
 const PostSchema = new Schema(
   {
-    title: { type: String, maxLength: 100 },
+    title: { type: String, maxLength: 100, default: null },
     text: { type: String, required: true, minLength: 1 },
     date: { type: Date, default: Date.now },
     isVisible: { type: Boolean, default: true },

@@ -3,11 +3,12 @@ const Post = require("../models/post");
 const { body, validationResult } = require("express-validator");
 
 exports.postListGet = asyncHandler(async (req, res, next) => {
+  console.log("getting posts");
   const posts = await Post.find();
   if (posts.length) {
     res.json({ posts });
   } else {
-    res.json({ posts: "There are no posts yet" });
+    res.json({ posts: [] });
   }
 });
 
@@ -15,9 +16,9 @@ exports.postGet = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id).populate("commentsID");
 
   if (post) {
-    res.json({ post });
+    res.json(post);
   } else {
-    res.json({ message: "Oops something went wrong" });
+    res.json({});
   }
 });
 
