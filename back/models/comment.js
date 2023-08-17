@@ -13,7 +13,7 @@ const CommentSchema = new Schema(
     text: { type: String, required: true, minLength: 1, maxLength: 600 },
     date: { type: Date, default: Date.now },
   },
-  { collation: "comments" }
+  { collection: "comments" }
 );
 
 CommentSchema.virtual("formattedDate").get(function () {

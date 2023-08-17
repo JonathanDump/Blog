@@ -5,12 +5,13 @@ const postController = require("../controllers/postController");
 const commentController = require("../controllers/commentController");
 
 /* GET home page. */
-router.get("/", (req, res, next) => res.redirect("/posts"));
-router.get("/posts", postController.postListGet);
 
-router.get("/posts/:id", postController.postGet);
+router.get("/", postController.postListGet);
 
-router.post("/posts/:id", commentController.createCommentPost);
+router.get("/:id", postController.postGet);
+// router.get("/:id", (req, res) => res.render("post"));
+
+router.post("/:id", commentController.createCommentPost);
 
 router.use("/admin", require("./admin"));
 

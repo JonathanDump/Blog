@@ -4,7 +4,7 @@ const Post = require("../models/post");
 const { body, validationResult } = require("express-validator");
 
 exports.deleteComment = asyncHandler(async (req, res, next) => {
-  await Comment.findByIdAndRemove(req.body.commentID);
+  await Comment.findByIdAndRemove(req.body.commentID).exec();
 });
 
 exports.createCommentPost = [
@@ -13,10 +13,15 @@ exports.createCommentPost = [
     .trim()
     .isLength({ min: 1 })
     .withMessage("Write something")
-    .isLength({ max: 1 })
+    .isLength({ max: 600 })
     .escape(),
 
   asyncHandler(async (req, res, next) => {
+    console.log("creating post");
+    // console.log("username", req.body.username);
+    // console.log("text", req.body.text);
+    console.log("req", req.body);
+
     const errors = validationResult(req);
 
     const comment = new Comment({
@@ -25,13 +30,16 @@ exports.createCommentPost = [
     });
 
     if (!errors.isEmpty()) {
-      res.json({ comment });
+      console.log("comment error", errors);
+      res.json(comment);
     } else {
+      console.log("saving comment", comment);
       await comment.save();
-      const post = await Post.findById(req.params.id);
-      post.commentsID.push(post._id);
+      const post = await Post.findById(req.params.id).exec();
+      post.commentsID.push(comment._id);
       await post.save();
-      res.redirect(`/posts/${req.params.id}`);
+      // res.redirect(`/${req.params.id}`);
+      res.json(post);
     }
   }),
 ];

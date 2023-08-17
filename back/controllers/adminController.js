@@ -22,7 +22,7 @@ exports.adminSignUp = asyncHandler(async (req, res, next) => {
 exports.adminLogIn = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
 
-  const admin = await Admin.findOne({ username: username });
+  const admin = await Admin.findOne({ username: username }).exec();
   console.log(admin);
   if (!admin) {
     return res.status(403).json({ message: "Incorrect username" });

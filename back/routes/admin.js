@@ -23,14 +23,6 @@ router.get(
   //   passport.authenticate("jwt", { session: false }),
   postController.postListGet
 );
-
-router.delete("/posts/:id", postController.deletePost);
-
-router.get("/posts/:id/update", postController.updatePostGet);
-router.put("/posts/:id/update", postController.updatePostPut);
-
-router.delete("/posts/:id", commentController.deleteComment);
-
 router.get(
   "/posts/create-post",
 
@@ -44,5 +36,12 @@ router.post(
 
   postController.createPost
 );
+
+router.delete("/posts/:id", postController.deletePost);
+
+router.get("/posts/:id/update", postController.updatePostGet);
+router.put("/posts/:id/update", postController.updatePostPut);
+
+router.delete("/posts/:id", commentController.deleteComment);
 
 module.exports = router;
