@@ -5,17 +5,16 @@ import PostCard from "../../Components/PostCard/PostCard";
 import Comment from "../../Components/Comment/Comment";
 
 export async function loader({ params }) {
-  console.log(params);
-  const response = await fetch(`http://localhost:3000/${params.id}`);
+  const API_URL = import.meta.env.VITE_API_ENDPOINT;
+
+  const response = await fetch(`${API_URL}/${params.id}`);
   const post = await response.json();
   return { post };
 }
 
 export default function Post() {
   const [inputData, setInputData] = useState({ username: "", text: "" });
-  const [rerender, setRerender] = useState(1);
   const [post, setPost] = useState(useLoaderData().post);
-  // const { post } = useLoaderData();
 
   const handleChange = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
@@ -23,23 +22,21 @@ export default function Post() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const API_URL = import.meta.env.VITE_API_ENDPOINT;
     const body = JSON.stringify({
       username: inputData.username,
       text: inputData.text,
     });
-    console.log("body", body);
-    await fetch(`http://localhost:3000/${post._id}`, {
+
+    await fetch(`${API_URL}/${post._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body,
     });
-    // console.log(response);
-    // setRerender(rerender + 1);
-    // setPost(useLoaderData().post);
 
-    const response = await fetch(`http://localhost:3000/${post._id}`, {
+    const response = await fetch(`${API_URL}/${post._id}`, {
       method: "GET",
     });
     const result = await response.json();
@@ -47,7 +44,6 @@ export default function Post() {
     setInputData({ username: "", text: "" });
   };
 
-  console.log(inputData);
   return (
     <div className={postCl.post}>
       <PostCard post={post}></PostCard>

@@ -40,5 +40,5 @@ exports.adminLogIn = asyncHandler(async (req, res, next) => {
   const adminId = admin._id;
   const token = await jwt.sign({ adminId }, secret, opts);
   console.log("token", token);
-  return res.status(200).json({ admin, token: `Bearer ${token}` });
+  return res.status(200).json({ token: `Bearer ${token}` });
 });
