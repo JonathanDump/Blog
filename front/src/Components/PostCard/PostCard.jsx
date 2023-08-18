@@ -2,6 +2,7 @@ import postCl from "./PostCard.module.scss";
 import React from "react";
 
 export default function PostCard({ post, isVisible }) {
+  console.log(isVisible);
   const { title, text, date } = post;
   const clName = isVisible
     ? postCl.postCard

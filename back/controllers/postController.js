@@ -32,17 +32,19 @@ exports.createPost = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
+    console.log(req.body);
     const post = new Post({
       title: req.body.title,
       text: req.body.text,
+      isVisible: req.body.isVisible,
       commentsID: [],
     });
 
     if (!errors.isEmpty()) {
-      res.json({ post });
+      res.status(400).json({ post, errors: errors.errors });
     } else {
       await post.save();
-      res.redirect("/admin/posts");
+      res.status(200).json({ message: "Success" });
     }
   }),
 ];

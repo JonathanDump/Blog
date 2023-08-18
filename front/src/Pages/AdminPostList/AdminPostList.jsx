@@ -22,7 +22,7 @@ export async function loader() {
 
 export default function AdminPostList() {
   const posts = useLoaderData();
-  console.log("posts in componetnt", posts);
+  console.log("posts in component", posts);
   if (posts.length) {
     return (
       <div className="contentContainer">
