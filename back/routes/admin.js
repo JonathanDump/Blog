@@ -37,6 +37,7 @@ router.post(
   postController.createPost
 );
 
+router.get("/posts/:id", postController.postGet);
 router.delete("/posts/:id", postController.deletePost);
 
 router.get("/posts/:id/update", postController.updatePostGet);

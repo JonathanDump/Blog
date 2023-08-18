@@ -6,7 +6,12 @@ import AdminLogInForm from "./Components/AdminLogInform/AdminLogInForm";
 import AdminPostList, {
   loader as adminPostsLoader,
 } from "./Pages/AdminPostList/AdminPostList";
-import PostForm from "./Components/PostForm/PostForm";
+import PostForm, {
+  loader as updatePostLoader,
+} from "./Components/PostForm/PostForm";
+import AdminPost, {
+  loader as adminPostLoader,
+} from "./Pages/AdminPost/AdminPost";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -25,6 +30,16 @@ export const Router = () => {
         {
           path: "/admin/posts/create-post",
           element: <PostForm method="POST" />,
+        },
+        {
+          path: "/admin/posts/:id/update",
+          element: <PostForm method="PUT" />,
+          loader: updatePostLoader,
+        },
+        {
+          path: "/admin/posts/:id",
+          element: <AdminPost />,
+          loader: adminPostLoader,
         },
       ],
     },

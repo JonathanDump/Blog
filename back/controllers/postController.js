@@ -54,7 +54,7 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
 });
 
 exports.updatePostGet = asyncHandler(async (req, res, next) => {
-  const post = Post.findById(rea.params.id).exec();
+  const post = await Post.findById(req.params.id).exec();
   res.json(post);
 });
 
@@ -69,15 +69,17 @@ exports.updatePostPut = [
     const errors = validationResult(req);
 
     const post = new Post({
+      _id: req.params.id,
       title: req.body.title,
       text: req.body.text,
+      isModified: true,
     });
 
     if (!errors.isEmpty()) {
-      res.json({ post });
+      res.status(400).json(post);
     } else {
-      const post = await Post.findByIdAndUpdate(req.params.id, post, {}).exec();
-      res.redirect(`/admin/posts/${post._id}`);
+      await Post.findByIdAndUpdate(req.params.id, post, {}).exec();
+      res.status(200).json({ message: "success" });
     }
   }),
 ];

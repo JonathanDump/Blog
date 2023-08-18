@@ -1,17 +1,29 @@
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { getJwtToken } from "../../functions/functions";
 import postFormCl from "./PostForm.module.scss";
-
 import React, { useState } from "react";
 
+export async function loader({ params }) {
+  console.log(params.id);
+  const API_URL = import.meta.env.VITE_API_ENDPOINT;
+  const response = await fetch(`${API_URL}/admin/posts/${params.id}/update`);
+  const post = await response.json();
+
+  return post;
+}
+
 export default function PostForm({ method }) {
-  const [inputValue, setInputValue] = useState({
-    title: "",
-    text: "",
-    isVisible: true,
-  });
+  const [inputValue, setInputValue] = useState(
+    useLoaderData() || {
+      title: "",
+      text: "",
+      isVisible: true,
+    }
+  );
   const [inputError, setInputError] = useState("");
   const navigate = useNavigate();
+  const { id } = useParams();
+  console.log("method", method);
 
   const handleChange = (e) => {
     if (e.target.name === "isVisible") {
@@ -23,13 +35,16 @@ export default function PostForm({ method }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("method", method);
     const jwt = getJwtToken();
     const API_URL = import.meta.env.VITE_API_ENDPOINT;
+    const URL = `${API_URL}/admin/posts${
+      method === "POST" ? "/create-post" : `/${id}/update`
+    }`;
+    console.log("URL", URL);
     const body = inputValue;
     console.log("body", body);
 
-    const response = await fetch(`${API_URL}/admin/posts/create-post`, {
+    const response = await fetch(URL, {
       method: method,
       headers: {
         Authorization: jwt,
@@ -46,13 +61,17 @@ export default function PostForm({ method }) {
       setInputError(result.errors[0].msg);
       return;
     }
-    console.log("post created");
 
-    navigate("/admin/posts");
+    method === "POST"
+      ? navigate("/admin/posts")
+      : navigate(`/admin/posts/${id}`);
   };
-  console.log(inputError);
+
   return (
     <div className={postFormCl.fromContainer}>
+      <div className={postFormCl}>
+        {method === "POST" ? "Create a post" : "Update the post"}
+      </div>
       <form className={postFormCl.form} onSubmit={(e) => handleSubmit(e)}>
         <div className={postFormCl.inputContainer}>
           <label htmlFor="title">Title</label>
