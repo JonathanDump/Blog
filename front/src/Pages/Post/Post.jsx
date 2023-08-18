@@ -6,7 +6,6 @@ import Comment from "../../Components/Comment/Comment";
 
 export async function loader({ params }) {
   const API_URL = import.meta.env.VITE_API_ENDPOINT;
-
   const response = await fetch(`${API_URL}/${params.id}`);
   const post = await response.json();
   return { post };

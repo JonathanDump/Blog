@@ -38,7 +38,11 @@ exports.adminLogIn = asyncHandler(async (req, res, next) => {
   opts.expiresIn = 1000 * 60 * 60 * 24;
   const secret = process.env.SECRET_KEY;
   const adminId = admin._id;
-  const token = await jwt.sign({ adminId }, secret, opts);
+  const token = await jwt.sign(
+    { adminId, isAdmin: admin.isAdmin },
+    secret,
+    opts
+  );
   console.log("token", token);
   return res.status(200).json({ token: `Bearer ${token}` });
 });

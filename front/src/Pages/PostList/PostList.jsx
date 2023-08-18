@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import Post from "../../Components/PostCard/PostCard";
-import postsCl from "./Posts.module.scss";
+import PostCard from "../../Components/PostCard/PostCard";
+import postsCl from "./PostList.module.scss";
 import { useGetPosts } from "../../hooks/useGetPosts";
+// import { useGetPostsAdmin } from "../../hooks/useGetPostsAdmin";
 
-export default function Posts() {
+export default function PostList() {
   const { posts, loading, error } = useGetPosts();
 
   if (error) {
@@ -20,7 +21,7 @@ export default function Posts() {
           if (post.isVisible) {
             return (
               <Link to={`${post._id}`} key={post._id}>
-                <Post post={post} />
+                <PostCard post={post} />
               </Link>
             );
           }

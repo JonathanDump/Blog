@@ -20,7 +20,7 @@ router.post("/sign-up", adminController.adminSignUp);
 
 router.get(
   "/posts",
-  //   passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   postController.postListGet
 );
 router.get(
