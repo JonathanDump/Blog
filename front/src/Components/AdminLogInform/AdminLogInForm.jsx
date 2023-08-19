@@ -1,10 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import formCl from "./AdminLogInForm.module.scss";
 
 import React, { useState } from "react";
 
 export default function AdminLogInForm() {
   const [inputData, setInputData] = useState({ username: "", password: "" });
-  console.log(inputData);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
@@ -21,7 +22,9 @@ export default function AdminLogInForm() {
     });
     const result = await response.json();
     localStorage.setItem("token", result.token);
+
     console.log(result);
+    navigate("/admin/posts");
   };
 
   return (

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useGetPostsAdmin } from "../../hooks/useGetPostsAdmin";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import React from "react";
+
+import { Link, useLoaderData } from "react-router-dom";
 import PostCard from "../../Components/PostCard/PostCard";
+import cl from "./AdminPostList.module.scss";
 
 export async function loader() {
   const jwt = localStorage.getItem("token");
@@ -18,17 +19,9 @@ export async function loader() {
 
 export default function AdminPostList() {
   const posts = useLoaderData();
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/admin/posts/create-post`);
-  };
 
   return (
     <div className="contentContainer">
-      <button type="button" onClick={handleClick}>
-        Create post
-      </button>
       {posts.length
         ? posts.map((post) => {
             return (

@@ -27,7 +27,7 @@ export default function Post() {
       text: inputData.text,
     });
 
-    await fetch(`${API_URL}/${post._id}`, {
+    const response = await fetch(`${API_URL}/${post._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,9 +35,6 @@ export default function Post() {
       body,
     });
 
-    const response = await fetch(`${API_URL}/${post._id}`, {
-      method: "GET",
-    });
     const result = await response.json();
     setPost(result);
     setInputData({ username: "", text: "" });

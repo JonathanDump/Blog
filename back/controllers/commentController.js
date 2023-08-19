@@ -45,7 +45,8 @@ exports.createCommentPost = [
       const post = await Post.findById(req.params.id).exec();
       post.commentsID.push(comment._id);
       await post.save();
-      // res.redirect(`/${req.params.id}`);
+      await post.populate("commentsID");
+
       res.json(post);
     }
   }),

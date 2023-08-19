@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { reducer } from "../../functions/reducer";
+
 import postCl from "./PostCard.module.scss";
-import React, { useReducer } from "react";
+import React from "react";
 
 export default function PostCard({ post, isAdmin }) {
-  const [result, dispatch] = useReducer(reducer);
   const navigate = useNavigate();
   const { title, text, date, isEdited, _id, isVisible } = post;
   const clName = isVisible
