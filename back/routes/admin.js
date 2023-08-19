@@ -23,26 +23,18 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   postController.postListGet
 );
-router.get(
-  "/posts/create-post",
+router.get("/posts/create-post", (req, res, next) => {
+  return res.render("createPostForm");
+});
 
-  (req, res, next) => {
-    return res.render("createPostForm");
-  }
-);
-
-router.post(
-  "/posts/create-post",
-
-  postController.createPost
-);
+router.post("/posts/create-post", postController.createPost);
 
 router.get("/posts/:id", postController.postGet);
 router.delete("/posts/:id", postController.deletePost);
 
+router.delete("/posts/:id/comment/delete", commentController.deleteComment);
+
 router.get("/posts/:id/update", postController.updatePostGet);
 router.put("/posts/:id/update", postController.updatePostPut);
-
-router.delete("/posts/:id", commentController.deleteComment);
 
 module.exports = router;

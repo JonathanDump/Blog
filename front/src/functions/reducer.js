@@ -3,16 +3,18 @@ export async function reducer(result, action) {
   const API_URL = import.meta.env.VITE_API_ENDPOINT;
   switch (action.type) {
     case "update": {
-      const response = await fetch(`${API_URL}/admin/${action.id}`, {
-        method: "PUT",
+      action.navigate(`/admin/posts/${action.id}/update`);
+    }
+
+    case "delete": {
+      await fetch(`${API_URL}/admin/posts/${action.id}`, {
+        method: "DELETE",
         headers: {
           Authorization: jwt,
           "Content-Type": "application/json",
         },
       });
-    }
-
-    case "delete": {
+      action.navigate("/admin/posts");
     }
   }
 }

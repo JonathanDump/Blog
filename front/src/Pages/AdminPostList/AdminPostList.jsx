@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useGetPostsAdmin } from "../../hooks/useGetPostsAdmin";
 import { Link, useLoaderData } from "react-router-dom";
 import PostCard from "../../Components/PostCard/PostCard";
@@ -9,16 +9,16 @@ export async function loader() {
   const response = await fetch(`${API_URL}/admin/posts`, {
     headers: {
       Authorization: jwt,
-      "Content-Type": "application/json",
     },
   });
   const responseData = await response.json();
-  console.log(responseData);
+  console.log("responseData", responseData);
   return responseData.posts;
 }
 
 export default function AdminPostList() {
   const posts = useLoaderData();
+  // const { posts, loading, error } = useGetPostsAdmin();
   console.log("posts in component", posts);
   if (posts.length) {
     return (
@@ -26,7 +26,7 @@ export default function AdminPostList() {
         {posts.map((post) => {
           return (
             <Link to={`${post._id}`} key={post._id}>
-              <PostCard post={post} isVisible={post.isVisible} />
+              <PostCard post={post} />
             </Link>
           );
         })}

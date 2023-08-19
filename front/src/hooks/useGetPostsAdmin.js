@@ -5,14 +5,15 @@ export function useGetPostsAdmin() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect((jwt) => {
+  useEffect(() => {
     async function getPosts() {
+      const jwt = localStorage.getItem("token");
       const API_URL = import.meta.env.VITE_API_ENDPOINT;
       try {
-        const response = await fetch(`${API_URL}/admin/post`, {
+        const response = await fetch(`${API_URL}/admin/posts`, {
           headers: {
             Authorization: jwt,
-            "Content-Type": "application/json",
+            "Cache-Control": "no-store",
           },
         });
 
