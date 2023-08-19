@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PostCard from "../../Components/PostCard/PostCard";
 import { useLoaderData } from "react-router-dom";
 import Comment from "../../Components/Comment/Comment";
@@ -19,13 +19,21 @@ export async function loader({ params }) {
 }
 
 export default function AdminPost() {
-  const post = useLoaderData();
+  const [post, setPost] = useState(useLoaderData());
+  // const post = useLoaderData();
   return (
     <div className="contentContainer">
       <PostCard post={post} isAdmin={true} />
       <div className="comments">
         {post.commentsID.map((comment) => {
-          return <Comment key={comment._id} comment={comment} isAdmin={true} />;
+          return (
+            <Comment
+              key={comment._id}
+              comment={comment}
+              isAdmin={true}
+              setPost={setPost}
+            />
+          );
         })}
       </div>
     </div>

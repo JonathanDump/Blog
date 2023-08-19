@@ -7,7 +7,7 @@ const CommentSchema = new Schema(
     username: {
       type: String,
       default: "Anonymous",
-      minLength: 1,
+
       maxLength: 100,
     },
     text: { type: String, required: true, minLength: 1, maxLength: 600 },

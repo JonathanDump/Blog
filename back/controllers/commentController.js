@@ -4,7 +4,14 @@ const Post = require("../models/post");
 const { body, validationResult } = require("express-validator");
 
 exports.deleteComment = asyncHandler(async (req, res, next) => {
-  await Comment.findByIdAndRemove(req.body.commentID).exec();
+  const [post, comment] = await Promise.all([
+    Post.findOne({ commentsID: req.body.commentID })
+      .populate("commentsID")
+      .exec(),
+    Comment.findByIdAndRemove(req.body.commentID).exec(),
+  ]);
+  console.log(post);
+  res.status(200).json(post);
 });
 
 exports.createCommentPost = [
