@@ -68,14 +68,15 @@ export default function PostForm({ method }) {
   };
 
   return (
-    <div className={postFormCl.fromContainer}>
-      <div className={postFormCl}>
+    <div className="contentContainer">
+      <div className={postFormCl.title}>
         {method === "POST" ? "Create a post" : "Update the post"}
       </div>
-      <form className={postFormCl.form} onSubmit={(e) => handleSubmit(e)}>
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <div className={postFormCl.inputContainer}>
           <label htmlFor="title">Title</label>
           <input
+            className="input"
             type="text"
             name="title"
             value={inputValue.title}
@@ -85,15 +86,18 @@ export default function PostForm({ method }) {
         <div className={postFormCl.inputContainer}>
           <label htmlFor="text">Text</label>
           <textarea
+            className="input"
             type="text"
             name="text"
             value={inputValue.text}
             onChange={(e) => handleChange(e)}
             minLength="1"
+            cols="20"
+            rows="20"
           ></textarea>
           <div className={postFormCl.inputError}>{inputError}</div>
         </div>
-        <div className={postFormCl.inputContainer}>
+        <div className={`${postFormCl.inputContainer} ${postFormCl.checkbox}`}>
           <label htmlFor="isVisible">Is it visible?</label>
           <input
             type="checkbox"
@@ -102,7 +106,7 @@ export default function PostForm({ method }) {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <button>Submit</button>
+        <button className="button">Submit</button>
       </form>
     </div>
   );

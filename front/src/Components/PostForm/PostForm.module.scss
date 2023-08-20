@@ -1,0 +1,15 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.checkbox {
+  flex-direction: row;
+  gap: 8px;
+}
+
+// .formContainer {
+//   display: flex;
+//   flex-direction: column;
+//   width: 100%;
+// }

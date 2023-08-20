@@ -1,17 +1,92 @@
 @import url("./scss/normalize.css");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import "./scss/variables";
+
+body {
+  font-family: "Open Sans", sans-serif;
+  div {
+    box-sizing: border-box;
+  }
+}
 
 a {
   text-decoration: none;
-  // color: black;
+  color: black;
+  max-width: 600px;
 
   &:visited {
-    // color: black;
+    color: black;
   }
 }
+
 .contentContainer {
+  max-width: $max-width;
   display: flex;
   flex-direction: column;
-  max-width: 600px;
-  border: 1px solid blue;
+  gap: 16px;
+  align-items: center;
+  position: relative;
+  width: 100%;
+
+  a {
+    width: 100%;
+  }
+
+  .button {
+    border: none;
+    border-radius: $border-radius;
+    font-size: 14px;
+    background-color: $blue-light;
+    padding: $button-padding2;
+    cursor: pointer;
+    transition: $transition;
+
+    &:hover {
+      background-color: $blue-dark;
+    }
+  }
+
+  .delete {
+    background-color: rgba(255, 0, 0, 0.2);
+
+    &:hover {
+      background-color: rgba(255, 0, 0, 0.4);
+    }
+  }
+
+  .commentsList {
+    border-radius: $border-radius;
+    padding: 16px;
+    border: 1px solid $blue-mid;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .commentTitle {
+    align-self: flex-start;
+    margin-top: 16px;
+  }
+}
+
+.form {
+  // max-width: 600px;
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid #e3f4f4;
+  border-radius: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input {
+  border-radius: 16px;
+  line-height: 1.5rem;
+  padding: 0 8px;
+  border: 1px solid #e3f4f4;
+  resize: none;
 }

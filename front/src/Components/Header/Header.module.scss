@@ -1,2 +1,24 @@
+@import "../../scss/variables";
+
 .header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+
+  .createPostButton {
+    background-color: $blue-light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $button-padding;
+    border-radius: $border-radius;
+    transition: $transition;
+
+    &:hover {
+      background-color: $blue-dark;
+    }
+  }
+  .logo {
+    font-size: 26px;
+  }
 }

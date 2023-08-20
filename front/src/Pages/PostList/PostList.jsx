@@ -16,7 +16,7 @@ export default function PostList() {
   }
   if (posts.length) {
     return (
-      <div className={postsCl.posts}>
+      <div className="contentContainer">
         {posts.map((post) => {
           if (post.isVisible) {
             return (

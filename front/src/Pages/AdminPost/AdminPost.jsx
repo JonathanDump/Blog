@@ -24,17 +24,20 @@ export default function AdminPost() {
   return (
     <div className="contentContainer">
       <PostCard post={post} isAdmin={true} />
-      <div className="comments">
-        {post.commentsID.map((comment) => {
-          return (
-            <Comment
-              key={comment._id}
-              comment={comment}
-              isAdmin={true}
-              setPost={setPost}
-            />
-          );
-        })}
+      <div className="commentTitle">Comments</div>
+      <div className="commentsList">
+        {!post.commentsID.length
+          ? "There are no comments yet"
+          : post.commentsID.map((comment) => {
+              return (
+                <Comment
+                  key={comment._id}
+                  comment={comment}
+                  isAdmin={true}
+                  setPost={setPost}
+                />
+              );
+            })}
       </div>
     </div>
   );

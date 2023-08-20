@@ -28,21 +28,23 @@ export default function AdminLogInForm() {
   };
 
   return (
-    <div className={formCl.formContainer}>
-      <form onSubmit={(e) => handelSubmit(e)}>
+    <div className="contentContainer">
+      <form onSubmit={(e) => handelSubmit(e)} className="form">
         <input
           type="text"
           name="username"
           placeholder="username"
           onChange={(e) => handleChange(e)}
+          className="input"
         />
         <input
           type="password"
           name="password"
           placeholder="password"
           onChange={(e) => handleChange(e)}
+          className="input"
         />
-        <button>Submit</button>
+        <button className="button">Submit</button>
       </form>
     </div>
   );

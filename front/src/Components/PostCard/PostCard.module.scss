@@ -1,8 +1,38 @@
+@import "../../scss/variables";
+
 .postCard {
-  border: 1px solid black;
+  border: 2px solid $blue-dark;
+  border-radius: $border-radius;
+  padding: $post-padding;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: $max-width;
+  width: 100%;
+  // width: clamp(200px, 100%, 600px);
+  position: relative;
+
+  .title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .date {
+    font-size: 14px;
+    // width: fit-content;
+    align-self: flex-end;
+  }
+
+  .buttonsContainer {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    display: flex;
+    gap: 8px;
+  }
 }
 
 .invisible {
-  border: 1px dashed red;
+  border: 1px dashed $blue-light;
   color: gray;
 }

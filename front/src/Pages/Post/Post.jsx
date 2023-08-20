@@ -41,32 +41,36 @@ export default function Post() {
   };
 
   return (
-    <div className={postCl.post}>
+    <div className="contentContainer">
       <PostCard post={post}></PostCard>
-      <div className={postCl.comments}>
-        {post.commentsID.map((comment) => {
-          return <Comment key={comment._id} comment={comment}></Comment>;
-        })}
+      <div className="commentTitle">Comments</div>
+      <div className="commentsList">
+        {!post.commentsID.length
+          ? "There are no comments yet"
+          : post.commentsID.map((comment) => {
+              return <Comment key={comment._id} comment={comment}></Comment>;
+            })}
       </div>
-      <form className={postCl.commentForm} onSubmit={(e) => handleSubmit(e)}>
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <input
           type="text"
           name="username"
-          className={postCl.input}
+          className="input"
           placeholder="Username"
           value={inputData.username}
           onChange={(e) => handleChange(e)}
         />
         <textarea
+          className="input"
           name="text"
           id="commentText"
-          cols="30"
+          cols="20"
           rows="10"
-          placeholder="write your comment"
+          placeholder="Write your comment"
           value={inputData.text}
           onChange={(e) => handleChange(e)}
         ></textarea>
-        <button>Submit</button>
+        <button className="button">Submit</button>
       </form>
     </div>
   );
