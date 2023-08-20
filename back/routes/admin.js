@@ -8,14 +8,14 @@ const passport = require("passport");
 
 router.get("/", (req, res) => res.json({ message: "Admin" }));
 
-router.get("/log-in", (req, res) => {
-  res.render("adminLogInForm");
-});
+// router.get("/log-in", (req, res) => {
+//   res.render("adminLogInForm");
+// });
 router.post("/log-in", adminController.adminLogIn);
 
-router.get("/sign-up", (req, res, next) => {
-  res.render("adminSignUpForm");
-});
+// router.get("/sign-up", (req, res, next) => {
+//   res.render("adminSignUpForm");
+// });
 router.post("/sign-up", adminController.adminSignUp);
 
 router.get(
@@ -23,9 +23,6 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   postController.postListGet
 );
-router.get("/posts/create-post", (req, res, next) => {
-  return res.render("createPostForm");
-});
 
 router.post("/posts/create-post", postController.createPost);
 

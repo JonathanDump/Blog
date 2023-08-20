@@ -9,7 +9,6 @@ const commentController = require("../controllers/commentController");
 router.get("/", postController.postListGet);
 
 router.get("/:id", postController.postGet);
-// router.get("/:id", (req, res) => res.render("post"));
 
 router.post("/:id", commentController.createCommentPost);
 
