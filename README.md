@@ -1,5 +1,5 @@
 # Blog
-First Full Stuck APP  
+First Full Stack APP  
 
 Live preview -> https://teal-fairy-a163d4.netlify.app/ 
 
